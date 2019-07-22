@@ -21,9 +21,10 @@
     border-bottom: 2px solid #262c5b;
 }
 .hide{
-  visibility: hidden;
+  display:none;
 }
 .searchoptions{
+ 
   background-color: #fff;
   width: 39.2%;
   position: absolute;
@@ -31,15 +32,41 @@
   left: 29.5%;
   border-bottom: 2px solid #262c5b;
   height: auto;
-  transition: 1s;
+  transition: .5s;
   text-align: left;
 }
 
-.listOptions:hover{
-  background-color:#262c5b;
+.chipDisplayDiv{
+  width: 100%;
+  display: inline-block;
+  height:auto;
+  min-height: 30px;
+  
+}
+
+.chipstyle{
+  list-style-type: none;
+  display: flex;
+  font-size: .75em;
+ 
+}
+.chipliststyle{
+  border: 2px solid #262c5b;
+  margin:10px;
+  padding: 2px;
+ 
+  display: flex;
+}
+
+.listOptions>p:hover{
+  background-color:#262c5b86;
   padding:5px;
   transition:.5s;
   color:white;
+}
+.listOptions{
+  display: flex;
+  color: rgba(128, 128, 128, 0.698);
 }
 .plusbtn{
     width: 4%;
@@ -150,12 +177,11 @@ input:focus, textarea:focus, select:focus{
 .SavedBy{
   display: flex;
   font-size:.8em;
-  position: absolute;
     top: 79.5%;
     left: 29.5%;
 }
 .SavedBy>p{
-  padding-left:4px;
+  padding-left:38px;
  
 }
 .SavedByValues{
@@ -290,6 +316,15 @@ select:-moz-focusring {
   .dwnbtn>img{
     width: 25px;
     height: 25px;
+  }
+#input2{
+  margin-left: 20px;
+  border:none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.603);
+}
+  .tickMark{
+    width: 16px;
+    height: 20px;
   }
   
 /* To be Deleted after Testing */

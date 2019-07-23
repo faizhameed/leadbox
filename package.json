@@ -1,4 +1,4 @@
-{ "homepage": "https://www.faizhameed.github.io/leadbox",
+{ "homepage": "http://www.faizhameed.github.io/leadbox",
   "name": "leadbox",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +13,7 @@
     "react-scripts": "3.0.1",
     "react-transition-group": "^1.2.1"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

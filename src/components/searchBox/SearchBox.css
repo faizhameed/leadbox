@@ -54,19 +54,72 @@
   border: 2px solid #262c5b;
   margin:10px;
   padding: 2px;
- 
   display: flex;
 }
 
 .listOptions>p:hover{
-  background-color:#262c5b86;
-  padding:5px;
-  transition:.5s;
-  color:white;
+  background-color:grey;
+  transition:.25s;
+  width:100%;
+  border-radius:4px;
+  padding: 10px;
+  color:rgb(255, 255, 255);
 }
+
+
 .listOptions{
   display: flex;
-  color: rgba(128, 128, 128, 0.698);
+
+  cursor: pointer;
+  
+}
+.listOptions>p{
+  margin-top: 10px;
+  color: rgb(0, 0, 0);
+  width:25%
+}
+#input2{
+  margin:10px;
+  border:none;
+  border-radius:4px;
+  width:70%;
+  background-color:rgb(255, 255, 255);
+}
+.addlistOptions{
+  background-color:#262c5b;
+  padding-left: 20px;
+  transition: .25s;
+  border-radius: 4px;
+  display: flex;
+  cursor: pointer;
+}
+.addlistOptions>p{
+  color:white;
+  margin-top: 10px;
+  width:25%
+}
+.addlistOptions>p:hover{
+  color:white;
+  background-color: #262c5b;
+  transition:.5s;
+}
+
+.listOptions2{
+  color: rgb(128, 128, 128);
+  font-size:.85em;
+  font-style: italic;
+  cursor: pointer;
+  border-radius:4px;
+  width:50%;
+  border:none;
+}
+
+.listOptions2:hover{
+  background-color:grey;
+  padding-left:2.5px;
+  transition: .5s;
+  color:rgb(255, 255, 255);
+
 }
 .plusbtn{
     width: 4%;
@@ -317,11 +370,7 @@ select:-moz-focusring {
     width: 25px;
     height: 25px;
   }
-#input2{
-  margin-left: 20px;
-  border:none;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.603);
-}
+
   .tickMark{
     width: 16px;
     height: 20px;

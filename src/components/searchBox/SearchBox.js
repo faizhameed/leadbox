@@ -2,15 +2,18 @@ import React, {useState,useEffect} from 'react'
 import "./SearchBox.css";
 import dwnbtn from "../../images/noun_Download_2120379.svg"
 import backArrow from "/home/faiz/Documents/Corefactors/leadbox/src/images/Mask Group 3.svg"
+
 /* import tickMark from "../../images/tick.svg" */
 
 function SearchBox() {
     const [chipValue,setChipValue] = useState([]);
     /* const [savedBy,setSavedBy]=useState(["By Shobana","Vimal's Lead", "Akshay Dec"]); */
-    const [listOptions, setlistOptions]=useState(["First Name","Last Name", "Address","Lead Type","Phone","Email ID"]);
-    const originalList = ["First Name","Last Name", "Address","Lead Type","Phone","Email ID"];
+    const [listOptions, setlistOptions]=useState(["First Name","Last Name", "Address","Phone","Email ID"]);
+    const originalList = ["First Name","Last Name", "Address","Phone","Email ID"];
+    const [leadType/* ,setleadType */] = useState(["Hot", "Cold","New"]);
+/*     const originalLeadType =["Hot", "Cold","New"]; */
     const [activateInput,setActivateInput]=useState([false]);
-   
+    
     
     
     /* Setting chip values based on the input for the keys in the options list */
@@ -57,7 +60,22 @@ function SearchBox() {
     const handleItemOptions=(item)=>{
         var el = document.getElementById('input2');
         if(el)
-        el.remove();  // remove input for previously clicked element
+        el.remove(); 
+        var addedclass =document.getElementsByClassName("addlistOptions");
+        if(addedclass.length>=1){
+                for(let i = 0;i<addedclass.length;i++){
+                    addedclass[i].classList.add("listOptions");
+                    addedclass[i].classList.remove("addlistOptions");
+                }
+
+        }
+
+        var d2 = document.getElementById("listTypeOpt");
+        if(d2){
+            d2.style.display="none";  
+        }
+       
+        // remove input for previously clicked element
         /* This Button removed until further notice */
         /* el = document.getElementsByClassName('input2btn');
         if(el)
@@ -70,10 +88,13 @@ function SearchBox() {
 /* Selecting the key from the options list for adding the input tag */
         var d1 = document.getElementById(item);
         d1.insertAdjacentHTML('beforeend', '<input id="input2" />');
+        d1.classList.remove("listOptions");
+       d1.classList.add("addlistOptions");
         /* This Button removed until further notice */
         /*  var element = document.getElementById(item+1);
         if(element!==null)
         element.classList.remove("hide"); */
+        
       }
 
 
@@ -97,7 +118,7 @@ function SearchBox() {
        let addList= item.split("").slice(0,filterChipIndex-1).join("");
 
    
-         setChipValue([...chipValue.filter(i=>i!==item)]);
+         setChipValue([...chipValue.filter(i=>i!==item)]);/* Chips set to new state */
 
         let keyOfChipValues = [...chipValue.map(item=>{
             item.split("").forEach((element,i)=>{
@@ -121,7 +142,17 @@ function SearchBox() {
       var el = document.getElementById('input2');
       if(el)
       el.remove();
-     
+     if(addList==="Lead Type"){
+         console.log("yes its a ",addList);
+         var leadDiv = document.getElementById("leadtype")
+var d1 = document.getElementById("listTypeOpt");
+if(d1 && leadDiv){
+    leadDiv.style.display = "block";
+    d1.style.display = "none";
+}
+
+     }
+
     }
 
    /* Edit the chip value on Click */
@@ -163,8 +194,64 @@ function SearchBox() {
           if(el)
           el.remove();
           setActivateInput([true,addList,addValue]);
+          if(addList==="Lead Type"){
+            console.log("yes its a ",addList);
+            var leadDiv = document.getElementById("leadtype")
+   var d1 = document.getElementById("listTypeOpt");
+   if(d1 && leadDiv){
+       leadDiv.style.display = "block";
+       d1.style.display = "none";
+   }
+     
+        }
+        var popup = document.getElementById('searchoptions');
+        if(popup)
+        popup.style.display = 'inline-block';
+
    }
 
+   /* Lead Type handle To show Lead Type Based on CLick */
+   var flaglead =0;
+   const leadTypeHandle =()=>{
+        var el = document.getElementById('input2');
+        if(el)
+        el.remove(); 
+        var addedclass =document.getElementsByClassName("addlistOptions");
+        if(addedclass.length>=1){
+                for(let i = 0;i<addedclass.length;i++){
+                    addedclass[i].classList.add("listOptions");
+                    addedclass[i].classList.remove("addlistOptions");
+                }
+
+        }
+       var d1 = document.getElementById("listTypeOpt");
+       console.log(d1);
+       if(d1){
+           if(flaglead===0)
+           { 
+               d1.style.display="block";
+               flaglead =1;
+            }
+               else{
+                   d1.style.display = "none"
+               flaglead =0;
+           }
+       }
+   }
+/* Lead value to as Chip */
+const leadToChip =(item)=>{
+
+let addValue = `Lead Type : ${item}`;
+setChipValue([...chipValue,addValue]);
+var leadDiv = document.getElementById("leadtype")
+var d1 = document.getElementById("listTypeOpt");
+if(d1 && leadDiv){
+    d1.style.display = "none";
+    leadDiv.style.display = "none";
+
+}
+flaglead =1;
+}
     useEffect(() => {
         // Update the document title using the browser API
 
@@ -189,6 +276,7 @@ function SearchBox() {
                     if(flag ===0){
                     flag=1;
                     popup.style.display = 'none';
+                   
                 }else{
                     flag=0;
                     popup.style.display = 'inline-block';
@@ -224,6 +312,7 @@ function SearchBox() {
         }
             setActivateInput([false])
         }
+        
 
     },[outclick,activateInput]);
 
@@ -296,15 +385,20 @@ function SearchBox() {
             </ul>   
 
                 </div>
-            <ul id = "popup" style = {{listStyleType:"none",display:"inline-block"}}>
+            <ul id = "popup" style = {{listStyleType:"none",display:"inline-block",width:"95%"}}>
             {
             listOptions.map((item)=><li onKeyDown={(e)=>handleInputValue2(e,item)} id ={item} className = "listOptions" key={item} >
                 <p onClick={() => handleItemOptions(item)}>{item}</p>
                 {/*  list input Button removed until further nortice */}
                {/*  <button id = {item+1} className = "input2btn hide" onClick ={handleOptionValue}><img className = "tickMark"src={tickMark} alt ="ok"/></button> */}
+               
                 </li>)
             }
-            </ul>
+           <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions"><p>Lead Type ▼ </p></li> 
+           <div id = "listTypeOpt" className = " hide">
+           { leadType.map(item=><p onClick={()=>leadToChip(item)} key={item} className = "listOptions2" >{item}</p>)}
+           </div>
+            </ul>   
             </div>
         </div>
     )

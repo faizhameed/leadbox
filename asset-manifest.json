@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/leadbox/static/css/main.6464b463.chunk.css",
+    "main.css": "/leadbox/static/css/main.27c3da8b.chunk.css",
     "main.js": "/leadbox/static/js/main.b1db8c24.chunk.js",
     "main.js.map": "/leadbox/static/js/main.b1db8c24.chunk.js.map",
     "runtime~main.js": "/leadbox/static/js/runtime~main.b4ea0879.js",
@@ -9,10 +9,10 @@
     "static/js/2.99271452.chunk.js": "/leadbox/static/js/2.99271452.chunk.js",
     "static/js/2.99271452.chunk.js.map": "/leadbox/static/js/2.99271452.chunk.js.map",
     "index.html": "/leadbox/index.html",
-    "precache-manifest.ffa24bfefe3206aafba6408c9068ba07.js": "/leadbox/precache-manifest.ffa24bfefe3206aafba6408c9068ba07.js",
+    "precache-manifest.b32f5e0b8f9b2c1513be45cd6450d246.js": "/leadbox/precache-manifest.b32f5e0b8f9b2c1513be45cd6450d246.js",
     "service-worker.js": "/leadbox/service-worker.js",
     "static/css/2.1f8037f7.chunk.css.map": "/leadbox/static/css/2.1f8037f7.chunk.css.map",
-    "static/css/main.6464b463.chunk.css.map": "/leadbox/static/css/main.6464b463.chunk.css.map",
+    "static/css/main.27c3da8b.chunk.css.map": "/leadbox/static/css/main.27c3da8b.chunk.css.map",
     "static/media/Mask Group 3.svg": "/leadbox/static/media/Mask Group 3.d7189b57.svg",
     "static/media/noun_Download_2120379.svg": "/leadbox/static/media/noun_Download_2120379.19bd94ae.svg"
   }

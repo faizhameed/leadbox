@@ -2,7 +2,9 @@ import React, {useState,useEffect} from 'react'
 import "./SearchBox.css";
 import dwnbtn from "../../images/noun_Download_2120379.svg"
 import backArrow from "/home/faiz/Documents/Corefactors/leadbox/src/images/Mask Group 3.svg"
-
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
 /* import tickMark from "../../images/tick.svg" */
 
 function SearchBox() {
@@ -236,22 +238,72 @@ if(d1 && leadDiv){
                    d1.style.display = "none"
                flaglead =0;
            }
-       }
-   }
-/* Lead value to as Chip */
+        }
+    }
+    /* Lead value to as Chip */
 const leadToChip =(item)=>{
 
-let addValue = `Lead Type : ${item}`;
-setChipValue([...chipValue,addValue]);
-var leadDiv = document.getElementById("leadtype")
-var d1 = document.getElementById("listTypeOpt");
-if(d1 && leadDiv){
-    d1.style.display = "none";
-    leadDiv.style.display = "none";
+    let addValue = `Lead Type : ${item}`;
+    setChipValue([...chipValue,addValue]);
+    var leadDiv = document.getElementById("leadtype")
+    var d1 = document.getElementById("listTypeOpt");
+    if(d1 && leadDiv){
+        d1.style.display = "none";
+        leadDiv.style.display = "none";
+    
+    }
+    flaglead =1;
+    }
 
+
+
+    /* Date Picker */
+const rangeSelection = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection',
+    disabled: false,
+    showDateDisplay: true,
 }
-flaglead =1;
+const [selectionRange, setselectionRange] = useState(rangeSelection);
+   const handleSelect=(ranges)=>{
+  /*   console.log("dateRange",ranges.selection.startDate); */
+    let selectionRangeNew = {
+        startDate: ranges.selection.startDate,
+        endDate:ranges.selection.endDate,
+        key:'selection',
+        disabled:false,
+        showDateDisplay: true,
+    }
+    setselectionRange(selectionRangeNew);
+    
 }
+ 
+const [dateflag, setdateflag] = useState(false);
+const dateHandle=()=>{
+    var dateDiv = document.getElementById("dateRangePicker");
+    
+    if(dateDiv)
+    if(!dateflag)
+    {
+    setdateflag(true);
+console.log(dateflag)
+}
+    else{
+        
+        setdateflag(false);
+        console.log(dateflag)
+    }
+}
+
+
+
+
+
+
+
+
+
     useEffect(() => {
         // Update the document title using the browser API
 
@@ -312,9 +364,15 @@ flaglead =1;
         }
             setActivateInput([false])
         }
-        
+        var dateDiv = document.getElementById("dateRangePicker");
+        if(dateDiv)
+        if(!dateflag){
+            dateDiv.style.display = "none";
+        }else {
+            dateDiv.style.display = "block";
+        }
 
-    },[outclick,activateInput]);
+    },[outclick,activateInput,dateflag]);
 
     const chipstyle = {
         listStyleType: 'none',
@@ -398,6 +456,15 @@ flaglead =1;
            <div id = "listTypeOpt" className = " hide">
            { leadType.map(item=><p onClick={()=>leadToChip(item)} key={item} className = "listOptions2" >{item}</p>)}
            </div>
+           <li onClick = {dateHandle} id = "dateType" className = "listOptions"><p>Date Range ▼</p></li>
+           <div id = "dateRangePicker">
+           <DateRangePicker 
+				ranges={[selectionRange]}
+                onChange={handleSelect}
+                showDateDisplay={true}
+			/>
+           </div>
+           
             </ul>   
             </div>
         </div>

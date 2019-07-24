@@ -48,6 +48,7 @@
   list-style-type: none;
   display: flex;
   font-size: .75em;
+  flex-wrap: wrap;
  
 }
 .chipliststyle{
@@ -376,6 +377,26 @@ select:-moz-focusring {
     height: 20px;
   }
   
+  /* 
+  
+  Date Picker*/
+
+  .rdrInputRanges {
+    display: none;
+}
+.rdrStaticRangeLabel {
+  display: block;
+  outline: 0;
+  line-height: 18px;
+  padding: 17px 20px;
+  text-align: left;
+}
+.rdrDefinedRangesWrapper {
+  width: 10%;
+}
+.rdrDateRangePickerWrapper {
+  width: 100%;
+}
 /* To be Deleted after Testing */
 
 

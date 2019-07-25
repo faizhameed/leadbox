@@ -380,10 +380,10 @@ select:-moz-focusring {
   /* 
   
   Date Picker*/
-
   .rdrInputRanges {
     display: none;
 }
+
 .rdrStaticRangeLabel {
   display: block;
   outline: 0;
@@ -392,8 +392,9 @@ select:-moz-focusring {
   text-align: left;
 }
 .rdrDefinedRangesWrapper {
-  width: 50%;
+  width: 25%;
 }
+
 .rdrDateRangePickerWrapper {
   width: 100%;
 }

@@ -1,20 +1,29 @@
 import React, {useState,useEffect} from 'react'
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import "./SearchBox.css";
 import dwnbtn from "../../images/noun_Download_2120379.svg"
 import backArrow from "/home/faiz/Documents/Corefactors/leadbox/src/images/Mask Group 3.svg"
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 
 
+
 function SearchBox() {
+    const rangeSelection = {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+        disabled: false,
+        showDateDisplay: true,
+    }
     const [chipValue,setChipValue] = useState([]);
     const [listOptions, setlistOptions]=useState(["First Name","Last Name", "Address","Phone","Email ID"]);
     const originalList = ["First Name","Last Name", "Address","Phone","Email ID"];
     const [leadType/* ,setleadType */] = useState(["Hot", "Cold","New"]);
     const [activateInput,setActivateInput]=useState([false]);
-    
-    
+    const [dateChip, setDateChip] = useState([]);
+    const [selectionRange, setselectionRange] = useState(rangeSelection);
+    const [dateflag, setdateflag] = useState(false);
     
     /* Setting chip values based on the input for the keys in the options list */
     
@@ -88,65 +97,72 @@ function SearchBox() {
     
     const handleDeleteChip = (item) =>{
         /*  const chip = [...chipValue.filter(i=>i!==item)]; */
-        let filterChipIndex;
-        item.split("").forEach((element,i)=>{
-            if (element === ":"){
-                filterChipIndex =  i;
-            }
-        })
-       let addList= item.split("").slice(0,filterChipIndex-1).join("");
-         setChipValue([...chipValue.filter(i=>i!==item)]);/* Chips set to new state */
-        let keyOfChipValues = [...chipValue.map(item=>{
-            item.split("").forEach((element,i)=>{
-                if (element === ":"){
-                    filterChipIndex =  i;
-                }
-            })
-            return item.split("").slice(0,filterChipIndex-1).join("")
-        })];
-
-        keyOfChipValues = keyOfChipValues.filter(key=>key!==addList);
-         var filtered = originalList.filter(
-            function(e) {
-              return this.indexOf(e) < 0;
-            },
-            keyOfChipValues
-        );
-      /*   console.log("filtered",filtered); */
+        
      
-      setlistOptions([...filtered]);
-      var el = document.getElementById('input2');
-      if(el)
-      el.remove();
-      var addedclass =document.getElementsByClassName("addlistOptions");
-        if(addedclass.length>=1){
-                for(let i = 0;i<addedclass.length;i++){
-                    addedclass[i].classList.add("listOptions");
-                    addedclass[i].classList.remove("addlistOptions");
-                }
-
+           
+           let filterChipIndex;
+           item.split("").forEach((element,i)=>{
+               if (element === ":"){
+                   filterChipIndex =  i;
+               }
+           })
+          let addList= item.split("").slice(0,filterChipIndex-1).join("");
+          console.log(addList);
+            setChipValue([...chipValue.filter(i=>i!==item)]);/* Chips set to new state */
+           let keyOfChipValues = [...chipValue.map(item=>{
+               item.split("").forEach((element,i)=>{
+                   if (element === ":"){
+                       filterChipIndex =  i;
+                   }
+               })
+               return item.split("").slice(0,filterChipIndex-1).join("")
+           })];
+    
+           keyOfChipValues = keyOfChipValues.filter(key=>key!==addList);
+            var filtered = originalList.filter(
+               function(e) {
+                 return this.indexOf(e) < 0;
+               },
+               keyOfChipValues
+           );
+         /*   console.log("filtered",filtered); */
+        
+         setlistOptions([...filtered]);
+         var el = document.getElementById('input2');
+         if(el)
+         el.remove();
+         var addedclass =document.getElementsByClassName("addlistOptions");
+           if(addedclass.length>=1){
+                   for(let i = 0;i<addedclass.length;i++){
+                       addedclass[i].classList.add("listOptions");
+                       addedclass[i].classList.remove("addlistOptions");
+                   }
+    
+           }
+        if(addList==="Lead Type"){
+            console.log("yes its a ",addList);
+            var leadDiv = document.getElementById("leadtype")
+           var d1 = document.getElementById("listTypeOpt");
+           if(d1 && leadDiv){
+           leadDiv.style.display = "block";
+           d1.style.display = "none";
+    }
+    
+}
+        if(addList==="Date"||addList ==="Date Range"){
+         
+            setDateChip([...dateChip.filter(i=>i!==item)])
+    
         }
-     if(addList==="Lead Type"){
-         console.log("yes its a ",addList);
-         var leadDiv = document.getElementById("leadtype")
-        var d1 = document.getElementById("listTypeOpt");
-        if(d1 && leadDiv){
-        leadDiv.style.display = "block";
-        d1.style.display = "none";
-}
+        
 
-
-     }
-if(addList==="Date Range"){
-    document.getElementById("dateType").style.display="block";
-    setdateflag(true)
-}
     }
 
+    
    /* Edit the chip value on Click */
    const editChipValue = (item) =>{
             /*  const chip = [...chipValue.filter(i=>i!==item)]; */
-            console.log("from item",item)
+      
             let filterChipIndex;
             item.split("").forEach((element,i)=>{
                 if (element === ":"){
@@ -154,7 +170,7 @@ if(addList==="Date Range"){
                 }
             })
            let addList= item.split("").slice(0,filterChipIndex-1).join("");
-        
+         
            let addValue= item.split("").slice(filterChipIndex+2,item.length).join("");
        
              setChipValue([...chipValue.filter(i=>i!==item)]);
@@ -201,9 +217,9 @@ if(addList==="Date Range"){
      
         }
 
-        if(addList==="Date Range"){
-            document.getElementById("dateType").style.display="block";
-            setdateflag(true)
+        if(addList==="Date"||addList ==="Date Range"){
+            /* come back here later */
+            setDateChip([...dateChip.filter(i=>i!==item)])
         }
         var popup = document.getElementById('searchoptions');
         if(popup)
@@ -241,7 +257,6 @@ if(addList==="Date Range"){
     }
     /* Lead value to as Chip */
 const leadToChip =(item)=>{
-
     let addValue = `Lead Type : ${item}`;
     setChipValue([...chipValue,addValue]);
     var leadDiv = document.getElementById("leadtype")
@@ -249,7 +264,6 @@ const leadToChip =(item)=>{
     if(d1 && leadDiv){
         d1.style.display = "none";
         leadDiv.style.display = "none";
-    
     }
     flaglead =1;
     }
@@ -257,20 +271,15 @@ const leadToChip =(item)=>{
 
 
     /* Date Picker */
-const rangeSelection = {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection',
-    disabled: false,
-    showDateDisplay: true,
-}
-const [selectionRange, setselectionRange] = useState(rangeSelection);
-   const handleSelect=(ranges)=>{
 
+
+   const dateHandleSelect=(ranges)=>{
     let startDate = ranges.selection.startDate.toString().split("").splice(4,11).join("");
     let endDate = ranges.selection.endDate.toString().split("").splice(4,11).join("")
-    let dateRange = `Date Range : ${startDate} to ${endDate}`
-    setChipValue ([...chipValue,dateRange]);
+  let dateRange = [`Date Range : ${startDate} to ${endDate}`]
+    setDateChip([...dateRange]);
+   /*  let dtcd=document.getElementById("dateChip");
+    dtcd.style.display = "block"; */
     let selectionRangeNew = {
         startDate: ranges.selection.startDate,
         endDate:ranges.selection.endDate,
@@ -279,11 +288,11 @@ const [selectionRange, setselectionRange] = useState(rangeSelection);
         showDateDisplay: true,
     }
     setselectionRange(selectionRangeNew);
-    document.getElementById("dateType").style.display="none";
-    setdateflag(false);/* so that there is no display of the div after setting */
+    
+    /* so that there is no display of the div after setting */
 }
  
-const [dateflag, setdateflag] = useState(false);
+
 const dateHandle=()=>{
     var dateDiv = document.getElementById("dateRangePicker");
     
@@ -408,6 +417,11 @@ console.log(dateflag)
              style = {liStyle}><p  onClick={() => editChipValue(item)} >{item}</p>
              <button className="btn1" onClick={() => handleDeleteChip(item)}>X</button>
              </li>)}
+                {dateChip.map((item)=>
+                    <li key  = {item} style = {liStyle}><p onClick={() => editChipValue(item)} >{item}</p>
+             <button className="btn1" onClick={() => handleDeleteChip(item)}>X</button>
+             </li>
+                )}
             </ul> 
             <button className = "nlbtn">New Lead +</button>
             <button className = "imbtn">Import</button>
@@ -427,6 +441,14 @@ console.log(dateflag)
              <p onClick={() => editChipValue(item)} >{item}</p> 
              <button className="btn1" onClick={() => handleDeleteChip(item)}>X</button>
              </li>)}
+             {
+                 dateChip.map((item)=>
+                    <li id="dateChip" className= "chipliststyle" key  = "dateChip" ><p  onClick={() => editChipValue(item)} >{item}</p>
+                    <button className="btn1" onClick={() => handleDeleteChip(item)}>X</button>
+                    </li>
+                 )
+             }
+            
             </ul>   
 
                 </div>
@@ -447,7 +469,7 @@ console.log(dateflag)
            <div id = "dateRangePicker">
            <DateRangePicker 
 				ranges={[selectionRange]}
-                onChange={handleSelect}
+                onChange={dateHandleSelect}
                 showDateDisplay={true}
 			/>
            </div>

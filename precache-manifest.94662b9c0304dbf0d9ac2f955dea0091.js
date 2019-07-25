@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a21238d4d2b25ec566f714a9dc35d4bb",
+    "revision": "7cd26f5e6d79599ad2293867f57b80b5",
     "url": "/leadbox/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/leadbox/static/css/2.1f8037f7.chunk.css"
   },
   {
-    "revision": "addad4437d33a3e6b9df",
+    "revision": "f41c868401daf9f4c69c",
     "url": "/leadbox/static/css/main.eaec9267.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/leadbox/static/js/2.e5f0b65e.chunk.js"
   },
   {
-    "revision": "addad4437d33a3e6b9df",
-    "url": "/leadbox/static/js/main.4c4e99c5.chunk.js"
+    "revision": "f41c868401daf9f4c69c",
+    "url": "/leadbox/static/js/main.b5393604.chunk.js"
   },
   {
     "revision": "d23408c3ae2c85643b1e",

@@ -31,7 +31,7 @@
   top: 69%;
   left: 29.5%;
   border-bottom: 2px solid #262c5b;
-  height: auto;
+  height: 361px;
   transition: .5s;
   text-align: left;
 }
@@ -58,14 +58,14 @@
   display: flex;
 }
 
-.listOptions>p:hover{
-  background-color:grey;
-  transition:.25s;
-  width:100%;
-  border-radius:4px;
-  padding: 10px;
-  color:rgb(255, 255, 255);
-}
+  .listOptions>p:hover{
+    background-color:grey;
+    transition:.25s;
+    width:100%;
+    border-radius:4px;
+    padding: 10px;
+    color:rgb(255, 255, 255);
+  }
 
 
 .listOptions{
@@ -401,3 +401,35 @@ select:-moz-focusring {
 /* To be Deleted after Testing */
 
 
+
+div::-webkit-scrollbar {
+  width: .5em;
+}
+
+div::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+div::-webkit-scrollbar-thumb {
+background-color: darkgrey;
+outline: 1px solid slategrey;
+border-radius: 10px;
+}
+div::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}
+/* Lead Type select */
+
+.css-2b097c-container {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+}
+.listTypeOpt{
+ 
+  position: absolute;
+  width: 50%;
+  top: 69%;
+  left: 25%;
+}

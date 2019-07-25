@@ -5,8 +5,8 @@ import "./SearchBox.css";
 import dwnbtn from "../../images/noun_Download_2120379.svg"
 import backArrow from "/home/faiz/Documents/Corefactors/leadbox/src/images/Mask Group 3.svg"
 import { DateRangePicker } from 'react-date-range';
-
-
+import {Element} from 'react-scroll';
+import Select from 'react-select';
 
 function SearchBox() {
     const rangeSelection = {
@@ -16,17 +16,26 @@ function SearchBox() {
         disabled: false,
         showDateDisplay: true,
     }
+    const options = [
+        { value: 'hot', label: 'Hot' },
+        { value: 'cold', label: 'Cold' },
+        { value: 'new', label: 'New' }
+      ]
     const [chipValue,setChipValue] = useState([]);
     const [listOptions, setlistOptions]=useState(["First Name","Last Name", "Address","Phone","Email ID"]);
     const originalList = ["First Name","Last Name", "Address","Phone","Email ID"];
-    const [leadType/* ,setleadType */] = useState(["Hot", "Cold","New"]);
+    /* const [leadType,setleadType] = useState(options); */
     const [activateInput,setActivateInput]=useState([false]);
     const [dateChip, setDateChip] = useState([]);
     const [selectionRange, setselectionRange] = useState(rangeSelection);
     const [dateflag, setdateflag] = useState(false);
     
+
+
+
+
+
     /* Setting chip values based on the input for the keys in the options list */
-    
     const handleInputValue1=(event)=>{
         if(event.keyCode === 13)
         { const val = document.getElementById("searchInput");
@@ -257,7 +266,8 @@ function SearchBox() {
     }
     /* Lead value to as Chip */
 const leadToChip =(item)=>{
-    let addValue = `Lead Type : ${item}`;
+    console.log(item.label);
+    let addValue = `Lead Type : ${item.label}`;
     setChipValue([...chipValue,addValue]);
     var leadDiv = document.getElementById("leadtype")
     var d1 = document.getElementById("listTypeOpt");
@@ -401,8 +411,7 @@ console.log(dateflag)
             <div id="searchWrapper" className = "SearchBoxWrapper select">    
             <input autoComplete="off" onClick = {handleHide} onKeyDown={handleInputValue1} 
             id = "searchInput" placeholder="Filter (Type something…..)" className="search"/>
-            </div>
-           
+            </div> 
             <div className="select2">
             <select className="btn2">  
                     <option>All Leads</option>
@@ -426,13 +435,26 @@ console.log(dateflag)
             <button className = "nlbtn">New Lead +</button>
             <button className = "imbtn">Import</button>
             <button className = "dwnbtn"><img src ={dwnbtn} alt = "Download"/></button>
-
             {/* List box appears only when clicking the input area */} 
+            
             <div ref={el=>outclick=el} id ="searchoptions" className="searchoptions hide">
             <div className = "SavedBy">
             <p style = {{color:'grey'}}>Recent:</p>
            {/*  {savedBy.map((item,i) =><p className="SavedByValues" key = {i+item}>{item}</p>)} */}
             </div>
+            <Element name="test7" className="element" id="containerElement" style={{
+            position: 'relative',
+            height: '340px',
+            overflow: 'scroll',
+            marginBottom: '100px',
+            overflowX: "hidden",
+            
+
+          }}>
+<Element name="firstInsideContainer" style={{
+              marginBottom: '20px'
+            }}>
+                
                 <div className = "chipDisplayDiv">
 
                 <ul className = "chipstyle">
@@ -448,10 +470,14 @@ console.log(dateflag)
                     </li>
                  )
              }
-            
             </ul>   
 
                 </div>
+          </Element>
+
+          <Element name="secondInsideContainer" style={{
+              marginBottom: '20px'
+            }}>
             <ul id = "popup" style = {{listStyleType:"none",display:"inline-block",width:"95%"}}>
             {
             listOptions.map((item)=><li onKeyDown={(e)=>handleInputValue2(e,item)} id ={item} className = "listOptions" key={item} >
@@ -461,10 +487,13 @@ console.log(dateflag)
                
                 </li>)
             }
-           <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions"><p>Lead Type ▼ </p></li> 
+           {/* <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions"><p>Lead Type ▼ </p></li> 
            <div id = "listTypeOpt" className = " hide">
-           { leadType.map(item=><p onClick={()=>leadToChip(item)} key={item} className = "listOptions2" >{item}</p>)}
-           </div>
+           { leadType.map(item=><p onClick={()=>leadToChip(item.label)} key={item.label} className = "listOptions2" >{item.label}</p>)}
+           </div> */}
+           <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions" ><p>Lead Type ▼ </p>
+           </li>
+         
            <li onClick = {dateHandle} id = "dateType" className = "listOptions"><p>Date Range ▼</p></li>
            <div id = "dateRangePicker">
            <DateRangePicker 
@@ -475,6 +504,13 @@ console.log(dateflag)
            </div>
            
             </ul>   
+              
+          </Element>
+              
+          </Element>
+          <div id = "listTypeOpt" className = "listTypeOpt hide">
+           <Select onChange = {leadToChip} options={options} />
+           </div>
             </div>
         </div>
     )

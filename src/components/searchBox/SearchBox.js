@@ -89,7 +89,7 @@ function SearchBox() {
         d1.classList.remove("listOptions");
        d1.classList.add("addlistOptions");
         
-        
+       setdateflag(false);
       }
 
 

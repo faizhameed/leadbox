@@ -491,17 +491,11 @@ console.log(dateflag)
            <div id = "listTypeOpt" className = " hide">
            { leadType.map(item=><p onClick={()=>leadToChip(item.label)} key={item.label} className = "listOptions2" >{item.label}</p>)}
            </div> */}
-           <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions" ><p>Lead Type ▼ </p>
+           <li onClick={leadTypeHandle} id = "leadtype" className= "listOptions" ><p>Lead Type</p>
            </li>
          
-           <li onClick = {dateHandle} id = "dateType" className = "listOptions"><p>Date Range ▼</p></li>
-           <div id = "dateRangePicker">
-           <DateRangePicker 
-				ranges={[selectionRange]}
-                onChange={dateHandleSelect}
-                showDateDisplay={true}
-			/>
-           </div>
+           <li onClick = {dateHandle} id = "dateType" className = "listOptions"><p>Date Range</p></li>
+           
            
             </ul>   
               
@@ -509,7 +503,14 @@ console.log(dateflag)
               
           </Element>
           <div id = "listTypeOpt" className = "listTypeOpt hide">
-           <Select onChange = {leadToChip} options={options} />
+           <Select placeholder = "Select Lead Type" onChange = {leadToChip} options={options} />
+           </div>
+           <div id = "dateRangePicker" className = "dateRangePicker">
+           <DateRangePicker 
+				ranges={[selectionRange]}
+                onChange={dateHandleSelect}
+                showDateDisplay={true}
+			/>
            </div>
             </div>
         </div>
